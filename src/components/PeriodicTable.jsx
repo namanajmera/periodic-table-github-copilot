@@ -1095,6 +1095,7 @@ export default function PeriodicTable() {
                 selectedElement && <ElementModal selectedElement={selectedElement} closeModalData={closeModalData}/>
             }
             <div>
+                <h3>Element Category Selection</h3>
                 <CategorySelection categorySelection={categorySelection}/>
             </div>
         </>

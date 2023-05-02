@@ -5,7 +5,7 @@ export default function ElementModal({selectedElement, closeModalData}) {
         closeModalData();
     }
   return (
-    <div className='modal'>
+    <div className='modal' aria-label={'element modal'}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 id="element-modal-title">{selectedElement.name}</h2>
             <p>
