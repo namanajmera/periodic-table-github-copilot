@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Element from './Element';
 import ElementModal from './ElementModal';
+import CategorySelection from './CategorySelection';
 
 export default function PeriodicTable() {
     // Periodic elements with their number, name, symbol, weight, category, melting point and boiling point
@@ -649,7 +650,7 @@ export default function PeriodicTable() {
         symbol: "Hf",
         name: "Hafnium",
         weight: 178.49,
-        category: "Transition Metal",
+        category: "Transition metal",
         meltingPoint: 2506,
         boilingPoint: 4876
     },
@@ -658,7 +659,7 @@ export default function PeriodicTable() {
         symbol: "Ta",
         name: "Tantalum",
         weight: 180.95,
-        category: "Transition Metal",
+        category: "Transition metal",
         meltingPoint: 3290,
         boilingPoint: 5731
     },
@@ -667,7 +668,7 @@ export default function PeriodicTable() {
         symbol: "W",
         name: "Tungsten",
         weight: 183.84,
-        category: "Transition Metal",
+        category: "Transition metal",
         meltingPoint: 3695,
         boilingPoint: 5828
     },
@@ -1069,13 +1070,17 @@ export default function PeriodicTable() {
     }
     ];
     const [selectedElement, setSelectedElement] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleClick = (element) => {
-        console.log(element);
         setSelectedElement(element)
     }
     const closeModalData = () => {
         setSelectedElement(null)
+    }
+
+    const categorySelection = (category) => {
+        setSelectedCategory(category);
     }
     return (
         <>
@@ -1083,12 +1088,15 @@ export default function PeriodicTable() {
             <div className='periodic-table'>
                 {
                     elements && elements.map((element) => (
-                        <Element name={element.name} symbol={element.symbol} number={element.number} weight={element.weight} category={element.category} onClick={() => handleClick(element)}/>
+                        <Element name={element.name} symbol={element.symbol} number={element.number} weight={element.weight} category={element.category} onClick={() => handleClick(element)} selected={selectedCategory === element.category}/>
                     ))}
             </div>
             {
                 selectedElement && <ElementModal selectedElement={selectedElement} closeModalData={closeModalData}/>
             }
+            <div>
+                <CategorySelection categorySelection={categorySelection}/>
+            </div>
         </>
     )
 }
