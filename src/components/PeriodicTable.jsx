@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Element from './Element';
+import ElementModal from './ElementModal';
 
 export default function PeriodicTable() {
     // Periodic elements with their number, name, symbol, weight, category, melting point and boiling point
@@ -1067,9 +1068,14 @@ export default function PeriodicTable() {
         boilingPoint: null
     }
     ];
+    const [selectedElement, setSelectedElement] = useState(null);
 
-    const handleClick = () => {
-        console.log('naman');
+    const handleClick = (element) => {
+        console.log(element);
+        setSelectedElement(element)
+    }
+    const closeModalData = () => {
+        setSelectedElement(null)
     }
     return (
         <>
@@ -1077,9 +1083,12 @@ export default function PeriodicTable() {
             <div className='periodic-table'>
                 {
                     elements && elements.map((element) => (
-                        <Element handleClick={handleClick} name={element.name} symbol={element.symbol} number={element.number} weight={element.weight} category={element.category}/>
+                        <Element name={element.name} symbol={element.symbol} number={element.number} weight={element.weight} category={element.category} onClick={() => handleClick(element)}/>
                     ))}
             </div>
+            {
+                selectedElement && <ElementModal selectedElement={selectedElement} closeModalData={closeModalData}/>
+            }
         </>
     )
 }
